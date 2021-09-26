@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 echo "Hello World"
-print "New line below Hello World"
+printf "New line below Hello World"

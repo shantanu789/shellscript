@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Hello World"
-printf "New line below Hello World"
+printf "New line below Hello World\n"
 #Bash tips: Color and Formatting (ANSI/VT100 Control sequences)
 #Escape character <Esc> "\e","\033","\x1B" and followed by character/color code "<Esc>[FormatCodem..."
 #NOTE: The -e option of the echo command enable the parsing of the escape sequences.

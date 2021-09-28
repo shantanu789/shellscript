@@ -13,7 +13,7 @@ echo -e "This is \e[2mDim\e[0m"
 echo -e "This is \e[4mUnderline\e[0m"
 echo -e "This is \e[5mBlink\e[0m"
 echo -e "This is \e[7mInverted Color\e[0m"
-echo -e "This is \e[8mHidden\e[0m"
+echo -e "This is Hidden - \e[8mHidden\e[0m"
 
 #Reset of codes
 echo -e "\e[1;4mHow to reset codes\e[0m"
@@ -22,7 +22,7 @@ echo -e "This is \e[2mDim \e[22mNormal\e[0m"
 echo -e "This is \e[4mUnderline \e[24mNormal\e[0m"
 echo -e "This is \e[5mBlink \e[25m Normal\e[0m"
 echo -e "This is \e[7mInverted Color \e[27mNormal\e[0m"
-echo -e "This is \e[8mHidden \e[28mNormal\e[0m"
+echo -e "This is Hidden - \e[8mHidden \e[28mThis is back to Normal\e[0m"
 
 #Foreground Text color code
 echo -e "\e[1;4mForeground Text regular color codes\e[0m"

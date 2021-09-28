@@ -52,11 +52,14 @@ echo -e "Black color code 30 \e[30mBlack \e[0m"
 echo -e "White color code 97 \e[97mWhite \e[0m"
 
 #Default Foreground text color
+echo -e "\e[1;4mDefault Foreground text color\e[0m"
 echo -e "39 Default Foreground text color - \e[39mDefault\e[0m"
 #Default Background text color
+echo -e "\e[1;4mDefault Background text color\e[0m"
 echo -e "49 Default Background text color - \e[49mDefault\e[0m"
 
 #Default background colors
+echo -e "\e[1;4mDefault background colors\e[0m"
 echo -e "Code - 40 Default background \e[40mBlack\e[0m"
 echo -e "Code - 41 Default background \e[41mRed\e[0m"
 echo -e "Code - 42 Default background \e[42mGreen\e[0m"
@@ -73,3 +76,4 @@ echo -e "Code - 104 Default background \e[104mLight Blue\e[0m"
 echo -e "Code - 105 Default background \e[105mLight Magenta\e[0m"
 echo -e "Code - 106 Default background \e[106mLight Cyan\e[0m"
 echo -e "Code - 107 Default background \e[107;30mWhite background\e[0m"
+echo "=================================================================="

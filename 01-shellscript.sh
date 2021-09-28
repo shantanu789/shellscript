@@ -29,4 +29,18 @@ echo -e "Y Yellow color code 33 \e[33mYellow \e[0m"
 echo -e "B Blue color code 34 \e[34mBlue \e[0m"
 echo -e "M Magenta color code 35 \e[35mMagenta \e[0m"
 echo -e "C Cyan color code 36 \e[36mCyan \e[0m"
+
 echo -e "Light Gray color code 37 \e[37mLight Gray \e[0m"
+echo -e "Dark Gray color code 90 \e[90mDark Gray \e[0m"
+
+#Light color series and color codes
+echo -e "Light Red color code 91 \e[91m Light Red \e[0m"
+echo -e "Light Green color code 92 \e[92m Light Green \e[0m"
+echo -e "Light Yellow color code 93 \e[93m Light Yellow \e[0m"
+echo -e "Light Blue color code 94 \e[94m Light Blue \e[0m"
+echo -e "Light Magenta color code 95 \e[95m Light magenta \e[0m"
+echo -e "Light Cyan color code 96 \e[96m Light Cyan \e[0m"
+
+#Black and White color code
+echo -e "Black color code 30 \e[30mBlack \e[0m"
+echo -e "White color code 97 \e[97mWhite \e[0m"

@@ -7,7 +7,7 @@ printf "New line below Hello World\n"
 #NOTE: The “\e[0m” sequence removes all attributes (formatting and colors).
 #It can be a good idea to add it at the end of each colored text.
 #Set of codes
-echo -e "\e1;4mSet of codes\e[0m"
+echo -e "\e[1;4mSet of codes\e[0m"
 echo -e "This is \e[1mBold\e[0m"
 echo -e "This is \e[2mDim\e[0m"
 echo -e "This is \e[4mUnderline\e[0m"

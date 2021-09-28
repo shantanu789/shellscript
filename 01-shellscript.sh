@@ -8,12 +8,12 @@ printf "New line below Hello World\n"
 #It can be a good idea to add it at the end of each colored text.
 #Set of codes
 echo -e "\e[1;4mSet of codes\e[0m"
-echo -e "This is \e[1mBold\e[0m"
-echo -e "This is \e[2mDim\e[0m"
-echo -e "This is \e[4mUnderline\e[0m"
-echo -e "This is \e[5mBlink\e[0m"
-echo -e "This is \e[7mInverted Color\e[0m"
-echo -e "This is Hidden - \e[8mHidden\e[0m"
+echo -e "(1)This is \e[1mBold\e[0m"
+echo -e "(2)This is \e[2mDim\e[0m"
+echo -e "(4)This is \e[4mUnderline\e[0m"
+echo -e "(5)This is \e[5mBlink\e[0m"
+echo -e "(7)This is \e[7mInverted Color\e[0m"
+echo -e "(8)This is Hidden - \e[8mHidden\e[0m"
 
 #Reset of codes
 echo -e "\e[1;4mHow to reset codes\e[0m"
@@ -52,6 +52,24 @@ echo -e "Black color code 30 \e[30mBlack \e[0m"
 echo -e "White color code 97 \e[97mWhite \e[0m"
 
 #Default Foreground text color
-echo -e "Default Foreground text color - \e[39mDefault\e[0m"
+echo -e "39 Default Foreground text color - \e[39mDefault\e[0m"
 #Default Background text color
-echo -e "Default Background text color - \e[49mDefault\e[0m"
+echo -e "49 Default Background text color - \e[49mDefault\e[0m"
+
+#Default background colors
+echo -e "Code - 40 Default background \e[40mBlack\e[0m"
+echo -e "Code - 41 Default background \e[41mRed\e[0m"
+echo -e "Code - 42 Default background \e[42mGreen\e[0m"
+echo -e "Code - 43 Default background \e[43mYellow\e[0m"
+echo -e "Code - 44 Default background \e[44mBlue\e[0m"
+echo -e "Code - 45 Default background \e[45mMagenta\e[0m"
+echo -e "Code - 46 Default background \e[46mCyan\e[0m"
+echo -e "Code - 47 Default background \e[47mLight Gray\e[0m"
+echo -e "Code - 100 Default background \e[100mDark Gray\e[0m"
+echo -e "Code - 101 Default background \e[101mLight Red\e[0m"
+echo -e "Code - 102 Default background \e[102mLight Green\e[0m"
+echo -e "Code - 103 Default background \e[103mLight Yellow\e[0m"
+echo -e "Code - 104 Default background \e[104mLight Blue\e[0m"
+echo -e "Code - 105 Default background \e[105mLight Magenta\e[0m"
+echo -e "Code - 106 Default background \e[106mLight Cyan\e[0m"
+echo -e "Code - 107 Default background \e[107;30mWhite background\e[0m"

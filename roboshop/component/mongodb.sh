@@ -2,9 +2,9 @@
 
 Status_check(){
   if [ $? -eq 0 ]; then
-    echo -e "\e[32;1mSuccess\e[0m"
+    echo -e "\e[92;1mSuccess\e[0m"
   else
-    echo -e "\e[31;1mFailure\e[0m"
+    echo -e "\e[91;1mFailure\e[0m"
     exit 2
   fi
 }

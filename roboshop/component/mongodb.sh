@@ -12,6 +12,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 
 echo "Installing MongoDB"
@@ -20,6 +21,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 #systemctl enable mongod
 #systemctl start mongod
@@ -31,6 +33,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 
 echo "Restart MongoDB"
@@ -39,6 +42,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 
 echo "Download the RoboShop schema and load it"
@@ -47,16 +51,20 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 
+echo "Downloaded schema unzipped"
 cd /tmp
 unzip -o mongodb.zip &>>/tmp/log
 if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
 
+echo "Downloaded schema loaded"
 cd mongodb-main
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log
@@ -64,4 +72,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32;1mSuccess\e[0m"
 else
   echo -e "\e[31;1mFailure\e[0m"
+  exit 2
 fi
+
+exit 0

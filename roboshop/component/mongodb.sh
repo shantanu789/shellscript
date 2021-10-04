@@ -10,7 +10,7 @@ Status_check(){
 }
 
 Print(){
-  echo -n -e "$1 - "
+  echo -n -e "$1 - \t\t\t "
 }
 
 Print "Set up MongoDB repo"

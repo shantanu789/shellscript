@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-Sample () { echo I am a function}
+Sample () { echo I am a function
+}
 
 Sample
 

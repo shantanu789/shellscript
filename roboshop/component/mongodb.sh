@@ -10,7 +10,7 @@ Status_check(){
 }
 
 Print(){
-  echo -n -e "$1 - \t\t "
+  echo -n -e "$1 - \t\t " ##Tab spaces added just for fancy output
 }
 
 Print "Set up MongoDB repo\t\t\t\t"

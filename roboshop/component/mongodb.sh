@@ -20,7 +20,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mong
 Status_check $?
 
 echo "Installing MongoDB"
-yum install -y ongodb-org &>>/tmp/log
+yum install -y mongodb-org &>>/tmp/log
 Status_check $?
 #systemctl enable mongod
 #systemctl start mongod

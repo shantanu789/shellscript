@@ -9,7 +9,11 @@ Status_check(){
   fi
 }
 
-echo "Set up MongoDB repo"
+Print(){
+  echo -n -e "$1 - "
+}
+
+Print "Set up MongoDB repo"
 
 echo '[mongodb-org-4.2]
 name=MongoDB Repository
@@ -19,31 +23,31 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
 Status_check $?
 
-echo "Installing MongoDB"
+Print "Installing MongoDB"
 yum install -y mongodb-org &>>/tmp/log
 Status_check $?
 #systemctl enable mongod
 #systemctl start mongod
 
 #Update List IP address from 127.0.0.1 to 0.0.0.0 in config file '/etc/mongod.conf'
-echo "Modified /etc/mongod.conf"
+Print "Modified /etc/mongod.conf"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 Status_check $?
 
-echo "Restart MongoDB"
+Print "Restart MongoDB"
 systemctl restart mongod
 Status_check $?
 
-echo "Download the RoboShop schema and load it"
+Print "Download the RoboShop schema and load it"
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 Status_check $?
 
-echo "Downloaded schema unzipped"
+Print "Downloaded schema unzipped"
 cd /tmp
 unzip -o mongodb.zip &>>/tmp/log
 Status_check $?
 
-echo "Downloaded schema loaded"
+Print "Downloaded schema loaded"
 cd mongodb-main
 mongo < catalogue.js &>>/tmp/log
 mongo < users.js &>>/tmp/log

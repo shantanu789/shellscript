@@ -34,11 +34,11 @@ Print "Modified /etc/mongod.conf\t\t\t"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 Status_check $?
 
-Print "Restart MongoDB\t\t\t\t"
+Print "Restart MongoDB\t\t\t\t\t"
 systemctl restart mongod
 Status_check $?
 
-Print "Download the RoboShop schema and load it"
+Print "Download the RoboShop schema and load it\t"
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 Status_check $?
 

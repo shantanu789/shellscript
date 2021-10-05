@@ -59,6 +59,7 @@ Print "Moving systemd.service to catalogue.service\t\t"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 Status_check $?
 # fi
+Print "Catalogue Daemon reload and service Start\t\t"
 systemctl daemon-reload
 systemctl start catalogue &>>$LOG
 Status_check $?

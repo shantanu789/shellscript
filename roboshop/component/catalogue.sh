@@ -44,7 +44,7 @@ Status_check $?
 
 cd /home/roboshop/catalogue
 
-Print "Installing npm and NodeJs dependencies\t\t\t"
+Print "Installing npm and NodeJs dependencies\t\t"
 npm install --unsafe-perm=true &>>$LOG
 Status_check $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file

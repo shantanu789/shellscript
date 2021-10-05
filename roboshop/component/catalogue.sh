@@ -23,7 +23,7 @@ Print "Downloading Catalogue content\t\t\t"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$LOG
 Status_check $?
 
-Print "Extracting Catalogue\t\t\t"
+Print "Extracting Catalogue\t\t\t\t"
 cd /home/roboshop
 rm -rf catalogue
 # if [ -e "/home/roboshop/catalogue" ]; then
@@ -51,7 +51,7 @@ Status_check $?
 # Now, lets set up the service with systemctl.
 chown -R roboshop:roboshop /home/roboshop/
 
-Print "Catalogue Daemon and service Start\t\t\n"
+# Print "Catalogue Daemon and service Start\t\t"
 # if [ -e "/etc/systemd/system/catalogue.service" ]; then
 #   echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
 # else

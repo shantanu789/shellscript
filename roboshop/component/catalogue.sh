@@ -30,7 +30,7 @@ cd /home/roboshop
 # else
 #   unzip /tmp/catalogue.zip &>>$LOG
 # fi
-unzip /tmp/catalogue.zip &>>$LOG
+unzip -o /tmp/catalogue.zip &>>$LOG
 Status_check $?
 
 Print "Rename Catalogue main Dir"

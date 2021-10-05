@@ -2,9 +2,9 @@ help: ## SHOW THIS HELP: OPTIONs/ARGUMENTs to pass with "make"
 				@fgrep -h "##" $(MAKEFILE_LIST) | grep -v fgrep
 
 catalogue:  ## USE THIS OPTION TO INSTALL "catalogue" service
-				@bash catalogue.sh
+				@bash component/catalogue.sh
 cart:			## USE THIS OPTION TO INSTALL "cart" service
-				@bash cart.sh
+				@bash component/cart.sh
 mongodb:	## USE THIS OPTION TO INSTALL "mongodb" service
 				@bash component/mongodb.sh
 mysql:		## USE THIS OPTION TO INSTALL "mysql" service

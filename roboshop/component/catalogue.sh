@@ -37,7 +37,7 @@ Print "Rename Catalogue main Dir\t\t\t"
 # if [ -d "/home/roboshop/catalogue" ]; then
 #   echo -e "\e[33mSkipping, Directory Exists" &>>$LOG
 # else
-mv -rf catalogue-main catalogue
+mv -f catalogue-main catalogue
 # fi
 
 Status_check $?

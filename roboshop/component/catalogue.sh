@@ -25,14 +25,14 @@ Status_check $?
 
 Print "Extracting Catalogue\t\t\t\t"
 cd /home/roboshop
-rm -rf catalogue
+rm -rf catalogue && unzip -o /tmp/catalogue.zip &>>$LOG && mv catalogue-main catalogue
 # if [ -e "/home/roboshop/catalogue" ]; then
 #   echo -e "\e[33mZip file Previous Extract present,removing \e[0m" &>>$LOG
 #   rm -rf catalogue
 #   unzip /tmp/catalogue.zip &>>$LOG
 # fi
-unzip -o /tmp/catalogue.zip &>>$LOG
-mv catalogue-main catalogue
+# unzip -o /tmp/catalogue.zip &>>$LOG
+# mv catalogue-main catalogue
 Status_check $?
 
 # Print "Rename Catalogue main Dir\t\t\t"

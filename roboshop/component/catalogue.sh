@@ -25,16 +25,17 @@ Status_check $?
 
 Print "Extracting Catalogue zip"
 cd /home/roboshop
-if [ -e "/tmp/catalogue.zip" ]; then
-  echo "Zip file Exists,Skipping Extracting" &>>$LOG
-else
-  unzip /tmp/catalogue.zip &>>$LOG
-fi
+# if [ -e "/tmp/catalogue.zip" ]; then
+#   echo -e "\e[33mZip file Exists,Skipping, already Extracted\e[0m" &>>$LOG
+# else
+#   unzip /tmp/catalogue.zip &>>$LOG
+# fi
+unzip /tmp/catalogue.zip &>>$LOG
 Status_check $?
 
 Print "Rename Catalogue main Dir"
 if [ -d "/home/roboshop/catalogue" ]; then
-  echo -e "\e[33mSkipping File Exists" &>>$LOG
+  echo -e "\e[33mSkipping, Directory Exists" &>>$LOG
 else
   mv catalogue-main catalogue
 fi
@@ -43,14 +44,18 @@ Status_check $?
 
 cd /home/roboshop/catalogue
 
-Print "Installing npm"
+Print "Installing npm and NodeJs dependencies"
 npm install --unsafe-perm=true &>>$LOG
 Status_check $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
 Print "Catalogue Daemon and service Start"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+if [ -e "/etc/systemd/system/catalogue.service" ]; then
+  echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
+else
+  mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+fi
 systemctl daemon-reload
 systemctl start catalogue &>>$LOG
 Status_check $?

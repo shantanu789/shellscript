@@ -25,15 +25,20 @@ Status_check $?
 
 Print "Extracting Catalogue zip"
 cd /home/roboshop
-unzip /tmp/catalogue.zip &>>$LOG
+if [ -e "/tmp/catalogue.zip" ]; then
+  echo "Zip file Exists,Skipping Extracting" &>>$LOG
+else
+  unzip /tmp/catalogue.zip &>>$LOG
+fi
 Status_check $?
 
 Print "Rename Catalogue main Dir"
-if [[ -d "/home/roboshop/catalogue" || -d "/home/roboshop/catalogue-main" ]]; then
+if [ -d "/home/roboshop/catalogue" ]; then
   echo -e "\e[33mSkipping File Exists" &>>$LOG
 else
   mv catalogue-main catalogue
 fi
+
 Status_check $?
 
 cd /home/roboshop/catalogue

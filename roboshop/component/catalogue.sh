@@ -44,13 +44,13 @@ Status_check $?
 
 cd /home/roboshop/catalogue
 
-Print "Installing npm and NodeJs dependencies"
+Print "Installing npm and NodeJs dependencies\t"
 npm install --unsafe-perm=true &>>$LOG
 Status_check $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
-Print "Catalogue Daemon and service Start\t"
+Print "Catalogue Daemon and service Start\t\t"
 if [ -e "/etc/systemd/system/catalogue.service" ]; then
   echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
 else

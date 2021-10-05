@@ -11,7 +11,12 @@ Status_check $?
 #
 # So to run the catalogue service we choose to run as a normal user and that user name should be more relevant to the project. Hence we will use roboshop as the username to run the service.
 Print "Adding Roboshop user"
-useradd roboshop &>>$LOG
+id roboshop &>>$LOG
+if [ $? -eq 0 ]; then
+  echo -e "\e[33mSkipping adding user\e[0m"
+else
+  useradd roboshop &>>$LOG
+fi
 Status_check $?
 
 Print "Downloading Catalogue zip"

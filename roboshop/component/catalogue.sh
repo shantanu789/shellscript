@@ -34,11 +34,11 @@ unzip -o /tmp/catalogue.zip &>>$LOG
 Status_check $?
 
 Print "Rename Catalogue main Dir\t\t\t"
-if [ -d "/home/roboshop/catalogue" ]; then
-  echo -e "\e[33mSkipping, Directory Exists" &>>$LOG
-else
-  mv catalogue-main catalogue
-fi
+# if [ -d "/home/roboshop/catalogue" ]; then
+#   echo -e "\e[33mSkipping, Directory Exists" &>>$LOG
+# else
+mv -rf catalogue-main catalogue
+# fi
 
 Status_check $?
 
@@ -50,7 +50,7 @@ Status_check $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
-Print "Catalogue Daemon and service Start\t\t"
+Print "Catalogue Daemon and service Start\t\t\n"
 if [ -e "/etc/systemd/system/catalogue.service" ]; then
   echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
 else {

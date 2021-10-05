@@ -32,9 +32,12 @@ Status_check $?
 # NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 # Now, lets set up the service with systemctl.
 
+Print "Catalogue Daemon and service Start"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
 systemctl start catalogue &>>$LOG
 Status_check $?
+
+Print "Enabling catalogue service"
 systemctl enable catalogue
 Status_check $?

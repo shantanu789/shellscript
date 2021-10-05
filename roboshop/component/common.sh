@@ -18,5 +18,5 @@ if [ $UID -ne 0 ]; then
   exit 1
 fi
 
-LOG=/log/roboshop.log
+LOG="/log/roboshop.log"
 rm -f $LOG

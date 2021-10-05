@@ -13,7 +13,7 @@ Status_check $?
 Print "Adding Roboshop user"
 id roboshop &>>$LOG
 if [ $? -eq 0 ]; then
-  echo -e "\e[33mSkipping adding user\e[0m"
+  echo -e "\e[33mSkipping adding user\e[0m" &>>$LOG
 else
   useradd roboshop &>>$LOG
 fi

@@ -64,6 +64,6 @@ systemctl daemon-reload
 systemctl start catalogue &>>$LOG
 Status_check $?
 
-Print "Enabling catalogue service\t\t\t\t"
+Print "Enabling catalogue service\t\t\t"
 systemctl enable catalogue
 Status_check $?

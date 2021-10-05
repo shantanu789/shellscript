@@ -55,15 +55,15 @@ chown -R roboshop:roboshop /home/roboshop/
 # if [ -e "/etc/systemd/system/catalogue.service" ]; then
 #   echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
 # else
-Print "Moving systemd.service to catalogue.service\t\t"
+Print "Moving systemd.service to catalogue.service\t"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 Status_check $?
 # fi
-Print "Catalogue Daemon reload and service Start\t\t"
+Print "Catalogue Daemon reload and service Start\t"
 systemctl daemon-reload
 systemctl start catalogue &>>$LOG
 Status_check $?
 
-Print "Enabling catalogue service\t\t\t"
+Print "Enabling catalogue service\t\t\t\t"
 systemctl enable catalogue
 Status_check $?

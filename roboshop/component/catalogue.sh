@@ -60,11 +60,11 @@ chown -R roboshop:roboshop /home/roboshop/
 # Status_check $?
 # fi
 # Print "Catalogue Daemon reload and service Start\t"
-Print "Update Systemd service\t\t\t"
+Print "Update Systemd service\t\t\t\t"
 sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
 Status_check $?
 
-Print "Setup systemd.service\t"
+Print "Setup systemd.service\t\t\t\t"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG
 systemctl daemon-reload &>>$LOG && systemctl restart catalogue &>>$LOG && systemctl enable catalogue &>>$LOG
 Status_check $?

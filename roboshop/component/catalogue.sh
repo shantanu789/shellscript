@@ -55,15 +55,19 @@ chown -R roboshop:roboshop /home/roboshop/
 # if [ -e "/etc/systemd/system/catalogue.service" ]; then
 #   echo -e "\e[33mCatalogue service file Exists by previous run, skipping moving\e[0m" &>>$LOG
 # else
-Print "Moving systemd.service to catalogue.service\t"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG
-Status_check $?
+# Print "Setup systemd.service\t"
+# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG
+# Status_check $?
 # fi
-Print "Catalogue Daemon reload and service Start\t"
-systemctl daemon-reload
-systemctl start catalogue &>>$LOG
+# Print "Catalogue Daemon reload and service Start\t"
+Print "Update Systemd service\t\t\t"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
 Status_check $?
 
-Print "Enabling catalogue service\t\t\t"
-systemctl enable catalogue
+Print "Setup systemd.service\t"
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG
+systemctl daemon-reload &>>$LOG && systemctl restart catalogue &>>$LOG && systemctl enable catalogue &>>$LOG
 Status_check $?
+# Print "Enabling catalogue service\t\t\t"
+# systemctl enable catalogue
+# Status_check $?

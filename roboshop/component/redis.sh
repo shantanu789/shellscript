@@ -16,8 +16,8 @@ yum install redis -y &>>$LOG
 Status_check $?
 
 # Update the BindIP from 127.0.0.1 to 0.0.0.0 in config file /etc/redis.conf & /etc/redis/redis.conf
-Print "Updating the BindIP in config file /etc/redis.conf & /etc/redis/redis.conf\t"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>$LOG
+Print "Updating the BindIP in config file /etc/redis.conf\t" #& /etc/redis/redis.conf --> here not needed
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>$LOG #-e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf 
 Status_check $?
 
 Print "Start Redis Database\t\t\t\t"

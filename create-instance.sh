@@ -6,12 +6,13 @@ INSTANCE_NAME="$1"
 
 declare -A INSTANCE_STATE_CODE='([16]="running" [32]="shutting-down" [48]="terminated" [64]="stopping" [80]="stopped")'
 
-if [ -z "$(INSTANCE_NAME)" ]; then
+if [ -z "$INSTANCE_NAME" ]; then
   echo -e "\n\e[31mInstance Name or Input is missing\e[0m\n"
   exit 1
 fi
 # Getting instance state - running, stopped, terminated
 # instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
+
 INSTANCE_STATE=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$INSTANCE_NAME" | jq .Reservations[].Instances[].State.Code | sed -e 's/"//g')
 
 if [ $(INSTANCE_STATE) == '16' || $(INSTANCE_STATE) == '32' || $(INSTANCE_STATE) == '48' || $(INSTANCE_STATE) == '64' || $(INSTANCE_STATE) == '80' ]; then

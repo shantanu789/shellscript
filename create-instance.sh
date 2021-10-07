@@ -2,7 +2,7 @@
 
 LID="lt-048c498b2ab4c35c3"
 LVER=1
-INSTANCE_NAME=$1
+INSTANCE_NAME="$1"
 
 declare -A INSTANCE_STATE_CODE='([16]="running" [32]="shutting-down" [48]="terminated" [64]="stopping" [80]="stopped")'
 

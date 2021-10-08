@@ -2,18 +2,17 @@
 
 source component/common.sh
 
-yum install nginx -y
-systemctl enable nginx
-systemctl start nginx
+Print "Installing NGINX\t\t"
+yum install nginx -y &>>$LOG && systemctl enable nginx &>>$LOG && systemctl start nginx &>>$LOG
+Status_check $?
 
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+Print "Downloading HTDOCS\t\t"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$LOG
+Status_check $?
 
-cd /usr/share/nginx/html
-rm -rf ./*
-unzip /tmp/frontend.zip
-mv frontend-main/* .
-mv static/* .
-rm -rf frontend-master static README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
+Print "Setting up FrontEnd Default configuration\t"
+cd /usr/share/nginx/html && rm -rf ./* && unzip -o /tmp/frontend.zip &>>$LOG && mv frontend-main/* . && mv static/* . && rm -rf frontend-master static README.md && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
+Status_check $?
 
+Print "Restarting NGINX\t\t"
 systemctl restart nginx

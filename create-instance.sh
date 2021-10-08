@@ -15,7 +15,7 @@ if [ -z "$InstanceName" ]; then
   echo -e "\n\e[31mInstance Name or Input is missing\e[0m\n"
   exit 1
 fi
-# Getting instance state - running, stopped, terminated
+# Getting instance state - pending, running, shutting-down, terminated, stopping, stopped.
 # instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
 
 InstanceState=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$InstanceName" | jq .Reservations[].Instances[].State.Code | sed -e 's/"//g')
@@ -36,3 +36,5 @@ IP=$(aws ec2 run-instances --launch-template "LaunchTemplateId=$LID,Version=$LVE
 sed -e "s/INSTANCE_NAME/$InstanceName/" -e "s/INSTANCE_IP/$IP/" record.json > record-dns-show.json
 
 aws route53 change-resource-record-sets --hosted-zone-id Z04674552UCKELJX08IB3 --change-batch file://record-dns-show.json | jq
+
+# NOTE: This script is working fine without sudo previleges.

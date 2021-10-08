@@ -11,12 +11,13 @@ curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/fron
 Status_check $?
 
 Print "Setting up FrontEnd Default configuration\t"
-DIRECTORY_NAME='/usr/share/nginx/html'
-if [[ ! -d "$DIRECTORY_NAME" ]]; then
-  cd /usr/share/nginx/html && rm -rf ./* && unzip -o /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG && rm -rf frontend-main static README.md &>>$LOG && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
-else
-  echo -e "\e[36mSkipping...\e[0m \n"
-fi
+#DIRECTORY_NAME='/usr/share/nginx/html'
+#rm -rf "$DIRECTORY_NAME/*"
+#if [[ -d "$DIRECTORY_NAME" ]]; then
+cd /usr/share/nginx/html && rm -rf ./* && unzip -o /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG && rm -rf frontend-main static README.md &>>$LOG && mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
+# else
+#   echo -e "\e[36mSkipping...\e[0m \n"
+# fi
 Status_check $?
 
 Print "Restarting NGINX\t\t"

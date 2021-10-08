@@ -2,11 +2,11 @@
 
 source component/common.sh
 
-Print "Installing NGINX\t\t"
+Print "Installing NGINX\t\t\t\t"
 yum install nginx -y &>>$LOG #&& systemctl enable nginx &>>$LOG && systemctl start nginx &>>$LOG
 Status_check $?
 
-Print "Downloading HTDOCS\t\t"
+Print "Downloading HTDOCS\t\t\t\t"
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$LOG
 Status_check $?
 
@@ -20,6 +20,6 @@ cd /usr/share/nginx/html && rm -rf ./* && unzip -o /tmp/frontend.zip &>>$LOG && 
 # fi
 Status_check $?
 
-Print "Restarting NGINX\t\t"
+Print "Restarting NGINX\t\t\t\t"
 systemctl restart nginx &>>$LOG && systemctl enable nginx &>>$LOG
 Status_check $?

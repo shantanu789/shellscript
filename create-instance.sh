@@ -15,11 +15,18 @@ fi
 
 InstanceState="$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$InstanceName" | jq .Reservations[].Instances[].State.Code | sed -e 's/"//g')"
 
+echo -e "\t\t\e[32m-----------------Checking Existance of the same Instance-----------------\e[0m\n"
+
 if [[ "$InstanceState" == 16 || "$InstanceState" == 32 || "$InstanceState" == 48 || "$InstanceState" == 64 || "$InstanceState" == 80 ]]; then
   echo -e "\n\e[33m $InstanceName is exists and ${INSTANCE_STATE_CODE[$InstanceState]}\n"
   exit 1
+else
+  echo -e "\n\e[32mCheck Done.No Instance found...\e[0m\n"
 fi
 
 echo -e "\t\t\e[32m-----------------Launching Instance-----------------\e[0m\n"
 
-IP=$(aws ec2 --launch-template 'LaunchTemplateId=$LID,Version=$LVER' --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$InstanceName}]" "ResourceType=instance,Tags=[{Key=Name,Value=$InstanceName}]" | jq .Instances[].PrivateIpAddress | sed -e 's/"//g')
+IP="$(aws ec2 --launch-template 'LaunchTemplateId=$LID,Version=$LVER' --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$InstanceName}]" "ResourceType=instance,Tags=[{Key=Name,Value=$InstanceName}]" | jq .Instances[].PrivateIpAddress | sed -e 's/"//g')"
+
+sed -e "s/INSTANCE_NAME/$InstanceName/" -e "s/INSTANCE_IP/$IP/" record.json >/tmp/record.json
+aws route53 change-resource-record-sets --hosted-zone-id Z04674552UCKELJX08IB3 --change-batch file:///tmp/record.json | jq

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ $UID -ne 0 ]; then
-  echo -e "\e[31mPLEASE USE\e[0m '\e[36msudo'\e[0m \n"
-  exit 1
-fi
+# if [ $UID -ne 0 ]; then
+#   echo -e "\e[31mPLEASE USE\e[0m '\e[36msudo'\e[0m \n"
+#   exit 1
+# fi
 
 LID="lt-048c498b2ab4c35c3"
 LVER=1

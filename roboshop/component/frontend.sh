@@ -20,7 +20,7 @@ cd /usr/share/nginx/html && rm -rf ./* && unzip -o /tmp/frontend.zip &>>$LOG && 
 # fi
 Status_check $?
 
-sed -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>$LOG
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>$LOG
 
 Print "Restarting NGINX\t\t\t\t"
 systemctl restart nginx &>>$LOG && systemctl enable nginx &>>$LOG

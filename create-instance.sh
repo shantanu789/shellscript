@@ -18,10 +18,10 @@ InstanceState=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$Inst
 echo -e "\t\t\e[32m-----------------Checking Existance of the same Instance-----------------\e[0m\n"
 
 if [[ "$InstanceState" == 16 || "$InstanceState" == 32 || "$InstanceState" == 48 || "$InstanceState" == 64 || "$InstanceState" == 80 ]]; then
-  echo -e "\n\e[33m $InstanceName instance exists and is in ${INSTANCE_STATE_CODE[$InstanceState]} state\n"
+  echo -e "\t\e[33m $InstanceName instance exists and is in ${INSTANCE_STATE_CODE[$InstanceState]} state\n"
   exit 1
 else
-  echo -e "\n\e[32mCheck Done.No Instance found...\e[0m\n"
+  echo -e "\e[32mCheck Done.No Instance found...\e[0m\n"
 fi
 
 echo -e "\t\t\e[32m-----------------Launching Instance-----------------\e[0m\n"

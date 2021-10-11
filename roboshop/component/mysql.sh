@@ -23,29 +23,33 @@ DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{printf 
 
 # Next, We need to change the default root password in order to start using the database service.
 # mysql_secure_installation --> This will require manuall input. we need to eliminate this step
+Print "Reset Default password\t\t\t"
+echo 'show databases' | mysql -u root -pRoboShop@1 &>>$LOG
+if [ $? -eq 0 ]; then
+  echo "Root password already set\n" &>>$LOG
+else
+  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" > reset.mysql
+  mysql --connect-expired-password -u root -p"$DEFAULT_PASSWORD" < reset.mysql &>>$LOG
+fi
+Status_check $?
 
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" > reset.mysql
+Print "Uninstall Validate Password Plugin\t\t" # Run the following SQL commands to remove the password policy.
+echo "uninstall plugin validate_password;" > uninstall_validate.password
+mysql -u root -p"RoboShop@1" < uninstall_validate.password &>>$LOG
+Status_check $?
 
-# You can check the new password working or not using the following command.
+# Setup Needed for Application.
+# As per the architecture diagram, MySQL is needed by
+#
+# Shipping Service
+# So we need to load that schema into the database, So those applications will detect them and run accordingly.
+#
+# To download schema, Use the following command
+Print "Downloading MySQL archive\t\t\t"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG
+Status_check $?
 
-mysql  --connect-expired-password -u root -p"$DEFAULT_PASSWORD" < reset.mysql
-
-exit
-
-# Run the following SQL commands to remove the password policy.
-> uninstall plugin validate_password;
-Setup Needed for Application.
-As per the architecture diagram, MySQL is needed by
-
-Shipping Service
-So we need to load that schema into the database, So those applications will detect them and run accordingly.
-
-To download schema, Use the following command
-
-# curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-Load the schema for Services.
-
-# cd /tmp
-# unzip mysql.zip
-# cd mysql-main
-# mysql -u root -pRoboShop@1 <shipping.sql
+Print "Load the schema for Services\t\t\t"
+cd /tmp && unzip -o mysql.zip && cd mysql-main &>>$LOG
+mysql -u root -p"RoboShop@1" <shipping.sql
+Status_check $?

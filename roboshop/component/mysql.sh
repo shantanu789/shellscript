@@ -18,19 +18,21 @@ Print "Start MySQL\t\t\t\t"
 systemctl enable mysqld &>>$LOG && systemctl restart mysqld &>>$LOG
 Status_check $?
 
+# Now a default root password will be generated and given in the log file.
+DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{printf $NF}')
+
+# Next, We need to change the default root password in order to start using the database service.
+# mysql_secure_installation --> This will require manuall input. we need to eliminate this step
+
+echo 'ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';' > /tmp/reset.mysql
+
+# You can check the new password working or not using the following command.
+
+mysql -u root -p "$DEFAULT_PASSWORD" < /tmp/reset.mysql
+
 exit
 
-Now a default root password will be generated and given in the log file.
-# grep temp /var/log/mysqld.log
-
-Next, We need to change the default root password in order to start using the database service.
-# mysql_secure_installation
-
-You can check the new password working or not using the following command.
-
-# mysql -u root -p
-
-Run the following SQL commands to remove the password policy.
+# Run the following SQL commands to remove the password policy.
 > uninstall plugin validate_password;
 Setup Needed for Application.
 As per the architecture diagram, MySQL is needed by

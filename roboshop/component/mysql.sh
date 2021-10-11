@@ -33,7 +33,7 @@ else
 fi
 Status_check $?
 
-Print "Uninstall Validate Password Plugin\t\t" # Run the following SQL commands to remove the password policy.
+Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to remove the password policy.
 echo "uninstall plugin validate_password;" > uninstall_validate.password
 mysql -u root -p"RoboShop@1" < uninstall_validate.password &>>$LOG
 Status_check $?
@@ -45,11 +45,11 @@ Status_check $?
 # So we need to load that schema into the database, So those applications will detect them and run accordingly.
 #
 # To download schema, Use the following command
-Print "Downloading MySQL archive\t\t\t"
+Print "Downloading MySQL archive\t\t"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG
 Status_check $?
 
-Print "Load the schema for Services\t\t\t"
-cd /tmp && unzip -o mysql.zip && cd mysql-main &>>$LOG
+Print "Load the schema for Services\t\t"
+cd /tmp && unzip -o mysql.zip &>>$LOG && cd mysql-main &>>$LOG
 mysql -u root -p"RoboShop@1" <shipping.sql
 Status_check $?

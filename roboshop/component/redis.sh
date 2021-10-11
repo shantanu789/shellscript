@@ -7,8 +7,7 @@ yum install epel-release yum-utils -y &>>$LOG
 Status_check $?
 
 Print "Installing Remi repo and Enabling\t\t"
-yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>>$LOG
-yum-config-manager --enable remi &>>$LOG
+yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>>$LOG && yum-config-manager --enable remi &>>$LOG
 Status_check $?
 
 Print "Installing Redis Now\t\t\t\t"
@@ -17,7 +16,7 @@ Status_check $?
 
 # Update the BindIP from 127.0.0.1 to 0.0.0.0 in config file /etc/redis.conf & /etc/redis/redis.conf
 Print "Updating the BindIP in config file /etc/redis.conf" #& /etc/redis/redis.conf --> here not needed
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>$LOG -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>$LOG
 Status_check $?
 
 Print "Start Redis Database\t\t\t\t"

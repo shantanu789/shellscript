@@ -35,7 +35,15 @@ Status_check $?
 
 Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to remove the password policy.
 echo "uninstall plugin validate_password;" > uninstall_validate.password
-mysql -u root -p"RoboShop@1" < uninstall_validate.password &>>$LOG
+echo "SELECT PLUGIN_NAME, PLUGIN_STATUS
+       FROM INFORMATION_SCHEMA.PLUGINS
+       WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin
+mysql -u root -p"RoboShop@1" <query.plugin &>>$LOG
+if [ $? -eq 0 ]; then
+  echo "Already Uninstalled validate_password Plugin" &>>$LOG
+else
+  mysql -u root -p"RoboShop@1" <uninstall_validate.password &>>$LOG
+fi
 Status_check $?
 
 # Setup Needed for Application.

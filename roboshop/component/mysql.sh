@@ -28,7 +28,7 @@ echo 'ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';' > reset.mysql
 
 # You can check the new password working or not using the following command.
 
-mysql -u root -p "$DEFAULT_PASSWORD" < reset.mysql
+mysql -u root -p"$DEFAULT_PASSWORD" < reset.mysql
 
 exit
 

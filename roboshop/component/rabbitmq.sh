@@ -28,8 +28,11 @@ Status_check $?
 Print "Create application user\t\t\t\t"
 rabbitmqctl list_users | grep roboshop &>>$LOG
 if [ $? -ne 0 ]; then
-  rabbitmqctl add_user roboshop roboshop123 &>>$LOG && rabbitmqctl set_user_tags roboshop administrator &>>$LOG && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG
+  rabbitmqctl add_user roboshop roboshop123 &>>$LOG
 else
   echo -e "\e[33mRoboshop user already added\e[0m" &>>$LOG
 fi
+
+rabbitmqctl set_user_tags roboshop administrator &>>$LOG && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG
+
 Status_check $?

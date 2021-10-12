@@ -5,6 +5,7 @@ Status_check(){
     echo -e "[ \e[42;1mSuccess\e[0m ]"
   else
     echo -e "[ \e[41;1mFailure\e[0m ]"
+    echo -e "\e[33mPlease refer log - /tmp/roboshop.log\e[0m"
     exit 2
   fi
 }

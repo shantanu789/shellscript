@@ -35,6 +35,7 @@ Status_check $?
 
 Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to remove the password policy.
 echo "uninstall plugin validate_password;" > uninstall_validate.password
+
 echo "SELECT PLUGIN_NAME, PLUGIN_STATUS
        FROM INFORMATION_SCHEMA.PLUGINS
        WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin

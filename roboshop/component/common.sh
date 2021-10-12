@@ -56,7 +56,7 @@ SETUP_SYSTEMD_SERVICE(){
 
 NODEJS(){
   Print "Installing NodeJs\t\t\t\t"
-  yum install nodejs make gcc-c++ -y &>>$LOG
+  yum install nodejs make gcc-c++ maven -y &>>$LOG
   Status_check $?
   # Let's now set up the catalogue application.
   #

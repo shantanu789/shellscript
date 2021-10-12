@@ -115,18 +115,18 @@ NODEJS(){
 }
 
 JAVA(){
-  Print "Installing MAVEN\t\t\t"
+  Print "Installing MAVEN\t\t\t\t"
   yum install maven -y &>>$LOG
   Status_check $?
 
   ADD_APP_USER
   DOWNLOAD_ARCHIVES
 
-  Print "Making Shipping package and Rename\t\t\t"
+  Print "Making Shipping package and Rename\t\t"
   cd /home/roboshop/shipping && mvn clean package &>>$LOG && mv target/shipping-1.0.jar shipping.jar &>>$LOG
   Status_check $?
 
   chown -R roboshop:roboshop /home/roboshop/
 
-  
+
 }

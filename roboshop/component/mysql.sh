@@ -24,7 +24,7 @@ DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{printf 
 # Next, We need to change the default root password in order to start using the database service.
 # mysql_secure_installation --> This will require manuall input. we need to eliminate this step
 Print "Reset Default password\t\t\t"
-echo 'show databases' | mysql -u root -pRoboShop@1 &>>$LOG
+echo 'show databases' | mysql -u root -p"RoboShop@1" &>>$LOG
 if [ $? -eq 0 ]; then
   echo "Root password already set\n" &>>$LOG
 else
@@ -34,16 +34,17 @@ fi
 Status_check $?
 
 Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to remove the password policy.
-echo "uninstall plugin validate_password;" > uninstall_validate.password
 
-echo "SELECT PLUGIN_NAME, PLUGIN_STATUS
-       FROM INFORMATION_SCHEMA.PLUGINS
-       WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin
-mysql -u root -p"RoboShop@1" <query.plugin &>>$LOG
+# echo "SELECT PLUGIN_NAME, PLUGIN_STATUS
+#        FROM INFORMATION_SCHEMA.PLUGINS
+#        WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin
+# mysql -u root -p"RoboShop@1" <query.plugin &>>$LOG
+echo 'show plugins;' | mysql -u root -p"Roboshop@1" | grep -i 'validate_password' &>>$LOG
 if [ $? -eq 0 ]; then
-  echo "Already Uninstalled validate_password Plugin" &>>$LOG
-else
+  echo "uninstall plugin validate_password;" > uninstall_validate.password
   mysql -u root -p"RoboShop@1" <uninstall_validate.password &>>$LOG
+else
+  echo "Already Uninstalled validate_password Plugin" &>>$LOG
 fi
 Status_check $?
 

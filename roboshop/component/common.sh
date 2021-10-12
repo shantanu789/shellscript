@@ -131,3 +131,36 @@ JAVA(){
 
   SETUP_SYSTEMD_SERVICE
 }
+
+PYTHON(){
+Print "Install Python 3\t\t\t"
+yum install python36 gcc python3-devel -y &>>$LOG
+Status_check $?
+
+ADD_APP_USER
+
+DOWNLOAD_ARCHIVES
+
+# Download the repo.
+# cd /home/roboshop
+# $ curl -L -s -o /tmp/payment.zip "https://github.com/roboshop-devops-project/payment/archive/main.zip"
+# $ unzip /tmp/payment.zip
+# $ mv payment-main payment
+# $ cd payment
+
+Print "Install the dependencies\t\t\t"
+cd /home/roboshop/payment && pip3 install -r requirements.txt
+Status_check $?
+
+exit
+# Note: Above command may fail with permission denied, So run as root user
+
+## Update the roboshop user and group id in payment.ini file.
+
+#Setup the service
+
+# mv /home/roboshop/payment/systemd.service /etc/systemd/system/payment.service
+# systemctl daemon-reload
+# systemctl enable payment
+# systemctl start payment
+}

@@ -4,4 +4,4 @@ source component/common.sh
 
 COMPONENT=payment
 
-NODEJS
+PYTHON

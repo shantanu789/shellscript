@@ -11,15 +11,15 @@ Print "Setup YUM repositories for RabbitMQ\t\t"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>$LOG
 Status_check $?
 
-Print "Install RabbitMQ\t\t\t"
+Print "Install RabbitMQ\t\t\t\t"
 yum install rabbitmq-server -y &>>$LOG
 Status_check $?
 
-Print "Start RabbitMQ\t\t\t"
+Print "Start RabbitMQ\t\t\t\t\t"
 systemctl enable rabbitmq-server &>>$LOG && systemctl restart rabbitmq-server &>>$LOG
 Status_check $?
 # RabbitMQ comes with a default username / password as guest/guest. But this user cannot be used to connect. Hence we need to create one user for the application.
 
-Print "Create application user\t\t\t"
+Print "Create application user\t\t\t\t"
 rabbitmqctl add_user roboshop roboshop123 &>>$LOG && rabbitmqctl set_user_tags roboshop administrator &>>$LOG && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG
 Status_check $?

@@ -4,7 +4,8 @@ source component/common.sh
 
 # Erlang is a dependency which is needed for RabbitMQ.
 yum list installed | grep erlang &>>$LOG
-If [ $? -ne 0 ]; then
+
+if [ $? -ne 0 ]; then
   Print "Installing RabbitMQ dependency - Erlang\t\t"
   yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>>$LOG
 else

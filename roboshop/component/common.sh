@@ -47,7 +47,7 @@ DOWNLOAD_ARCHIVES(){
 
 SETUP_SYSTEMD_SERVICE(){
   Print "Update Systemd service\t\t\t\t"
-  sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
+  sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTHOST/cart.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/' -e 's/AMQPHOST/rabbitmq.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service 
   Status_check $?
 
   Print "Setup systemd.service\t\t\t\t"
@@ -148,17 +148,23 @@ DOWNLOAD_ARCHIVES
 # $ mv payment-main payment
 # $ cd payment
 
-Print "Install the dependencies\t\t\t"
+Print "Install the Python dependencies\t\t\t"
 cd /home/roboshop/payment && pip3 install -r requirements.txt &>>$LOG
 Status_check $?
 
-exit
 # Note: Above command may fail with permission denied, So run as root user
 
 ## Update the roboshop user and group id in payment.ini file.
 
-#Setup the service
+USER_ID=$(id -u roboshop)
+GROUP_ID=$(id -g roboshop)
 
+Print "Updating RoboShop user in config file\t"
+sed -i -e "/uid/ c uid=$USER_ID" -i -e "/gid/ c gid=$GROUP_ID"
+Status_check $?
+
+#Setup the service
+SETUP_SYSTEMD_SERVICE
 # mv /home/roboshop/payment/systemd.service /etc/systemd/system/payment.service
 # systemctl daemon-reload
 # systemctl enable payment

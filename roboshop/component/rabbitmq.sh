@@ -16,10 +16,10 @@ yum install rabbitmq-server -y &>>$LOG
 Status_check $?
 
 Print "Start RabbitMQ\t\t\t"
-systemctl enable rabbitmq-server && systemctl restart rabbitmq-server &>>$LOG
+systemctl enable rabbitmq-server &>>$LOG && systemctl restart rabbitmq-server &>>$LOG
 Status_check $?
 # RabbitMQ comes with a default username / password as guest/guest. But this user cannot be used to connect. Hence we need to create one user for the application.
 
 Print "Create application user\t\t\t"
-rabbitmqctl add_user roboshop roboshop123 && rabbitmqctl set_user_tags roboshop administrator && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG
+rabbitmqctl add_user roboshop roboshop123 &>>$LOG && rabbitmqctl set_user_tags roboshop administrator &>>$LOG && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG
 Status_check $?

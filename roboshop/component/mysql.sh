@@ -39,7 +39,7 @@ Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to
 #        FROM INFORMATION_SCHEMA.PLUGINS
 #        WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin
 # mysql -u root -p"RoboShop@1" <query.plugin &>>$LOG
-echo 'show plugins;' | mysql -u root --password="RoboShop@1" | grep -i 'validate_password' &>>$LOG
+echo 'show plugins;' | mysql -u root --password="RoboShop@1" 2>/dev/null | grep -i 'validate_password' &>>$LOG
 if [ $? -eq 0 ]; then
   echo "uninstall plugin validate_password;" > uninstall_validate.password
   mysql -u root --password="RoboShop@1" <uninstall_validate.password &>>$LOG

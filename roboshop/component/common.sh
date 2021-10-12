@@ -56,7 +56,7 @@ SETUP_SYSTEMD_SERVICE(){
 
 NODEJS(){
   Print "Installing NodeJs\t\t\t\t"
-  yum install nodejs make gcc-c++ maven -y &>>$LOG
+  yum install nodejs make gcc-c++ -y &>>$LOG
   Status_check $?
   # Let's now set up the catalogue application.
   #
@@ -112,4 +112,21 @@ NODEJS(){
   # Print "Enabling catalogue service\t\t\t"
   # systemctl enable catalogue
   # Status_check $?
+}
+
+JAVA(){
+  Print "Installing MAVEN\t\t\t"
+  yum install maven -y &>>$LOG
+  Status_check $?
+
+  ADD_APP_USER
+  DOWNLOAD_ARCHIVES
+
+  Print "Making Shipping package and Rename\t\t\t"
+  cd /home/roboshop/shipping && mvn clean package &>>$LOG && mv target/shipping-1.0.jar shipping.jar &>>$LOG
+  Status_check $?
+
+  chown -R roboshop:roboshop /home/roboshop/
+
+  
 }

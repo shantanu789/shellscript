@@ -4,4 +4,4 @@ source component/common.sh
 
 COMPONENT=shipping
 
-NODEJS
+JAVA

@@ -26,7 +26,7 @@ DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{printf 
 Print "Reset Default password\t\t\t"
 echo 'show databases' | mysql -u root -p"RoboShop@1" &>>$LOG
 if [ $? -eq 0 ]; then
-  echo "Root password already set\n" &>>$LOG
+  echo "Root password already set" &>>$LOG
 else
   echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" > reset.mysql
   mysql --connect-expired-password -u root -p"$DEFAULT_PASSWORD" < reset.mysql &>>$LOG
@@ -39,7 +39,7 @@ Print "Uninstall Validate Password Plugin\t" # Run the following SQL commands to
 #        FROM INFORMATION_SCHEMA.PLUGINS
 #        WHERE PLUGIN_NAME LIKE 'validate%';" >query.plugin
 # mysql -u root -p"RoboShop@1" <query.plugin &>>$LOG
-echo 'show plugins;' | mysql -u root -p"Roboshop@1" | grep -i 'validate_password' &>>$LOG
+echo 'show plugins;' | mysql -u root -p"Roboshop@1" 2>>$LOG | grep -i 'validate_password' &>>$LOG
 if [ $? -eq 0 ]; then
   echo "uninstall plugin validate_password;" > uninstall_validate.password
   mysql -u root -p"RoboShop@1" <uninstall_validate.password &>>$LOG

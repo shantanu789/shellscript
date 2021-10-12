@@ -61,5 +61,5 @@ Status_check $?
 
 Print "Load the schema for Services\t\t"
 cd /tmp && unzip -o mysql.zip &>>$LOG && cd mysql-main &>>$LOG
-mysql -u root --password=RoboShop@1 <shipping.sql &>>$LOG
+mysql -u root --password="RoboShop@1" <shipping.sql &>>$LOG
 Status_check $?

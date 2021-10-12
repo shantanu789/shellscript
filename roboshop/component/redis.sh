@@ -7,7 +7,12 @@ yum install epel-release yum-utils -y &>>$LOG
 Status_check $?
 
 Print "Installing Remi repo and Enabling\t\t"
-yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>>$LOG && yum-config-manager --enable remi &>>$LOG
+yum list installed | grep remi-release.noarch &>>$LOG
+if [ $? -ne 0 ]; then
+  yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>>$LOG && yum-config-manager --enable remi &>>$LOG
+else
+  echo -e "\e[33mRemi repo already installed\e[0m" &>>$LOG
+fi
 Status_check $?
 
 Print "Installing Redis Now\t\t\t\t"

@@ -160,7 +160,7 @@ USER_ID=$(id -u roboshop)
 GROUP_ID=$(id -g roboshop)
 
 Print "Updating RoboShop user in config file\t"
-sed -i -e "/uid/ c uid=$USER_ID" -e "/gid/ c gid=$GROUP_ID"
+sed -i -e "/uid/ c uid=$USER_ID" -e "/gid/ c gid=$GROUP_ID" /home/roboshop/payment/payment.ini
 Status_check $?
 
 #Setup the service

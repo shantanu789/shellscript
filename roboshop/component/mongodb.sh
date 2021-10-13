@@ -36,7 +36,11 @@ cd /tmp && unzip -o mongodb.zip &>>$LOG
 Status_check $?
 
 Print "Downloaded schema loaded\t\t\t"
-cd mongodb-main && mongo < catalogue.js &>>$LOG && mongo < users.js &>>$LOG
+# cd mongodb-main && mongo < catalogue.js &>>$LOG && mongo < users.js &>>$LOG
+for schema in catalogue users ; do
+  mongo < $schema.js &>>$LOG
+done
+
 Status_check $?
 
 exit 0
